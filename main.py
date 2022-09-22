@@ -36,6 +36,35 @@ class ButtonApp(App):
         System.exit(0);
 
 ##
+# Класс оповещений событий из Java
+##
+class CallbackWrapper(PythonJavaClass):
+    __javacontext__ = 'app'
+    __javainterfaces__ = ['some/kivy_test/CallbackWrapper']
+
+    def __init__(self):
+        super().__init__()
+
+    @java_method('()V')
+    def callback1(self):
+        print("Python: @java_method('()V')")
+
+    @java_method('(Ljava/lang/String;)Z')
+    def callback2(self, arg1):
+        print("Python: @java_method('(Ljava/lang/String;)Z'), ", arg1)
+        return True
+
+    @java_method('(IC)I')
+    def callback3(self, arg1 , arg2):
+        print("Python: @java_method('(IC)I'), ", arg1, arg2)
+        return 555
+
+    @java_method('(IB)I')
+    def callback4(self, arg1, arg2):
+        print("Python: @java_method('(IB)I'), ", arg1, arg2)
+        return 555
+
+##
 #  Старт.
 ##
 if __name__ == "__main__":
@@ -47,7 +76,14 @@ if __name__ == "__main__":
     # Вызов методов класса Test из Test.java
     Test = autoclass('some.kivy_test.Test')
 
-    print("Python: ", Test().hello())
+    callback_wrapper = CallbackWrapper()
+    test = Test(callback_wrapper)
+
+    print("Python: ", test.hello())
+
+    #test.callback1()
+    #test.callback2()
+    #test.callback3()
+    test.callback4()
 
     ButtonApp().run()
-    

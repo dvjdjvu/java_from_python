@@ -1,8 +1,9 @@
-package org.wherever.whatever;
+package some.kivy_test;
 
 // the wrapper interface
 public interface CallbackWrapper {
-    public boolean callback_call(String from);
-    public void callback_call_end();
-    public void callback_message(String from, String message);
+    public void callback1();
+    public boolean callback2(String arg1);
+    public int callback3(int arg1, char arg2);
+    public int callback4(int arg1, byte arg2);
 }
