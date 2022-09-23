@@ -54,13 +54,8 @@ class CallbackWrapper(PythonJavaClass):
         print("Python: @java_method('(Ljava/lang/String;)Z'), ", arg1)
         return True
 
-    @java_method('(IC)I')
-    def callback3(self, arg1 , arg2):
-        print("Python: @java_method('(IC)I'), ", arg1, arg2)
-        return 555
-
     @java_method('(IB)I')
-    def callback4(self, arg1, arg2):
+    def callback3(self, arg1, arg2):
         print("Python: @java_method('(IB)I'), ", arg1, arg2)
         return 555
 
@@ -81,9 +76,8 @@ if __name__ == "__main__":
 
     print("Python: ", test.hello())
 
-    #test.callback1()
-    #test.callback2()
-    #test.callback3()
-    test.callback4()
+    test.callback1()
+    test.callback2()
+    test.callback3()
 
     ButtonApp().run()

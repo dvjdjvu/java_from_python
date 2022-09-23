@@ -22,10 +22,6 @@ public class Test {
     }
 
     public void callback3() {
-        this.wrapper.callback3(11, '@');
-    }
-
-    public void callback4() {
-        this.wrapper.callback4(11, (byte) 22);
+        this.wrapper.callback3(11, (byte) 22);
     }
 }
