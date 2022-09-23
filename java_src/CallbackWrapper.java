@@ -1,6 +1,6 @@
 package some.kivy_test;
 
-// the wrapper interface
+// Обертка для python callback-ов
 public interface CallbackWrapper {
     public void callback1();
     public boolean callback2(String arg1);

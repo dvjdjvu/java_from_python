@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = kivy_test
+title = KivyTest
 
 # (str) Package name
 package.name = kivy_test
@@ -27,15 +27,7 @@ version = 0.0.28
 #requirements = python3, kivy==2.1.0, Cython, jnius, pyVoIP, git+https://github.com/kivy/python-for-android.git, sh, colorama, git+https://github.com/kivy/audiostream.git
 requirements = python3, \
                kivy, \
-               kivymd, \
-               Cython, \
-               jnius, \
-               python-for-android, \
-               sh, \
-               colorama, \
-               requests, \
-               idna, \
-               Pillow
+               jnius
 
 # git+https://github.com/kivy/audiostream.git
 #baresipy, pexpect, ptyprocess, opentone, responsivevoice, requests, urllib3, charset-normalizer, idna, pydub, ffmpeg

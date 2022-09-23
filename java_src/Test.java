@@ -13,6 +13,10 @@ public class Test {
         return "Hello from Test.java";
     }
 
+    public String hello2(String arg1) {
+        return arg1;
+    }
+
     public void callback1() {
         this.wrapper.callback1();
     }
