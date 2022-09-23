@@ -10,6 +10,7 @@ import jnius
 from jnius import cast
 from jnius import autoclass, PythonJavaClass, java_method
 
+# Подключение класса System
 System = autoclass('java.lang.System')
 PythonActivity = autoclass('org.kivy.android.PythonActivity')
 currentActivity = cast('android.app.Activity', PythonActivity.mActivity)
@@ -69,6 +70,7 @@ class CallbackWrapper(PythonJavaClass):
 if __name__ == "__main__":
     # Печать функций python
     print("Python: Hello world!")
+    
     # Вызов метода печати из класса System.
     System.out.println('I/python: Java: Hello world!')
 
