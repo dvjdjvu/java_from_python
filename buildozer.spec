@@ -22,14 +22,9 @@ version = 0.0.28
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-#requirements = python3, kivy==2.1.0, Cython, jnius, pyVoIP, git+https://github.com/kivy/python-for-android.git, sh, colorama, git+https://github.com/kivy/audiostream.git
 requirements = python3, \
                kivy, \
                jnius
-
-# git+https://github.com/kivy/audiostream.git
-#baresipy, pexpect, ptyprocess, opentone, responsivevoice, requests, urllib3, charset-normalizer, idna, pydub, ffmpeg
-#, git+https://github.com/dvjdjvu/pyVoIP
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
