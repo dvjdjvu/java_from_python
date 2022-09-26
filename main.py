@@ -6,14 +6,19 @@ kivy.require("2.1.0")
 from kivy.app import App
 from kivy.uix.button import Button
 
+from kivy.utils import platform
+
 import jnius
 from jnius import cast
 from jnius import autoclass, PythonJavaClass, java_method
 
 # Подключение класса System
 System = autoclass('java.lang.System')
-PythonActivity = autoclass('org.kivy.android.PythonActivity')
-currentActivity = cast('android.app.Activity', PythonActivity.mActivity)
+
+# Подключение классов Android
+if platform == 'android':
+    PythonActivity = autoclass('org.kivy.android.PythonActivity')
+    currentActivity = cast('android.app.Activity', PythonActivity.mActivity)
 
 # Класс графики, который создает кнопку для выхода из приложения.
 class ButtonApp(App):
@@ -33,14 +38,19 @@ class ButtonApp(App):
 
     # callback function tells when button pressed
     def callback(self, event):
-        currentActivity.finishAndRemoveTask();
-        System.exit(0);
+        if platform == 'android':
+            currentActivity.finishAndRemoveTask()
+
+        System.exit(0)
 
 ##
 # Класс оповещений событий из Java
 ##
 class CallbackWrapper(PythonJavaClass):
     __javacontext__ = 'app'
+
+    # Указываем что этот класс является реализацией интерфейса
+    # CallbackWrapper из пакета some.kivy_test
     __javainterfaces__ = ['some/kivy_test/CallbackWrapper']
 
     def __init__(self):
@@ -48,7 +58,7 @@ class CallbackWrapper(PythonJavaClass):
 
     ##
     # Реализация callback-ов описанных в CallbackWrapper.java.
-    # Имена должны быть разные.
+    # Имена методов должны быть разные.
     ##
     @java_method('()V')
     def callback1(self):
@@ -70,27 +80,31 @@ class CallbackWrapper(PythonJavaClass):
 if __name__ == "__main__":
     # Печать функций python
     print("Python: Hello world!")
-    
+
     # Вызов метода печати из класса System.
     System.out.println('I/python: Java: Hello world!')
 
-    # Получение указателя на класс Test из Test.java
-    Test = autoclass('some.kivy_test.Test')
+    if platform == 'android':
+        # Получение указателя на класс Test из Test.java
+        Test = autoclass('some.kivy_test.Test')
 
-    # Создание класса с callback-ми
-    callback_wrapper = CallbackWrapper()
+        # Создание класса с callback-ми, переменная содержащая объект класса должна быть
+        # глобальной или быть переменной внутри класса. Иначе объект Python выходит
+        # за рамки интерпретатора Python, даже если ссылка на него все еще существует в Java.
+        global callback_wrapper
+        callback_wrapper = CallbackWrapper()
 
-    # Создание класса Test из Test.java, передаем в него указатель на класс callback-ов
-    test = Test(callback_wrapper)
+        # Создание класса Test из Test.java, передаем в него указатель на класс callback-ов
+        test = Test(callback_wrapper)
 
-    # Демонстрация вызовов методов из класса Test
-    print("Python: ", test.hello())
-    print("Python: ", test.hello2("test.hello2()"))
+        # Демонстрация вызовов методов из класса Test
+        print("Python: ", test.hello())
+        print("Python: ", test.hello2("test.hello2()"))
 
-    # Демонстрация вызовов методов CallbackWrapper определенных здесь из класса Test
-    test.callback1()
-    test.callback2()
-    test.callback3()
+        # Демонстрация вызовов методов CallbackWrapper определенных здесь из класса Test
+        test.callback1()
+        test.callback2()
+        test.callback3()
 
     # Отрисовка графики приложения
     ButtonApp().run()
