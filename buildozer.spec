@@ -63,8 +63,6 @@ android.accept_sdk_license = True
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a
 
-android.gradle_dependencies = 'de.d0pam1n:pjsip-for-android:2.6'
-
 #android.add_jars = %(source.dir)s/java_lib/AJVoIP.jar
 #android.add_aars = %(source.dir)s/libs_lib/*.aar
 
