@@ -22,8 +22,10 @@ version = 0.0.28
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3, \
-               kivy, \
+requirements = android,
+               python3,
+               hostpython3,
+               kivy,
                jnius
 
 # (str) Custom source folders for requirements
@@ -47,7 +49,7 @@ android.api = 31
 android.minapi = 21
 
 # (str) Android NDK version to use
-android.ndk = 23b
+android.ndk = 25b
 
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
@@ -63,14 +65,10 @@ android.accept_sdk_license = True
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a
 
-#android.add_jars = %(source.dir)s/java_lib/AJVoIP.jar
-#android.add_aars = %(source.dir)s/libs_lib/*.aar
-
 # (list) Android additionnal libraries to copy into libs/armeabi
 android.add_src = %(source.dir)s/java_src/*
 android.add_libs_arm64_v8a = %(source.dir)s/libs/libs_arm64_v8a/*.*
 android.add_libs_armeabi_v7a = %(source.dir)s/libs/libs_armeabi-v7a/*.*
-#android.library_references = /home/djvu/workspace/intercom/phone/libs/libs_arm64_v8a/*.*
 
 #android.copy_libs = 1
 
