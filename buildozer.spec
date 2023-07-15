@@ -7,7 +7,7 @@ title = KivyTest
 package.name = kivy_test
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.heattheatr
+package.domain = some.kivy_test
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -66,7 +66,7 @@ android.accept_sdk_license = True
 android.archs = arm64-v8a
 
 # (list) Android additionnal libraries to copy into libs/armeabi
-android.add_src = %(source.dir)s/java_src/*
+android.add_src = %(source.dir)s/java
 android.add_libs_arm64_v8a = %(source.dir)s/libs/libs_arm64_v8a/*.*
 android.add_libs_armeabi_v7a = %(source.dir)s/libs/libs_armeabi-v7a/*.*
 
